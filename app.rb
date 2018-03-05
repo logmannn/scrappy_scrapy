@@ -5,20 +5,25 @@ Bundler.require(:default)
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
 get('/') do
-  @page = Nokogiri::HTML(open("https://www.indeed.com/jobs?q=jr+developer&l=Portland%2C+OR"))
+  @link = "https://www.indeed.com/jobs?q=jr+developer&l=Portland%2C+OR"
+  @page = Nokogiri::HTML(open("#{@link}"))
 
   #foreach page do the result
   #go to that page and get the links to the pages
-
   @amount_of_jobs = @page.css('#searchCount').to_s
   @amount_of_jobs =~ /Page 1 of (.*?) jobs/
   @amount_of_jobs = $1
 #.gsub(/Page 1 of /, '').gsub(/ jobs/, '')
   @amount_of_pages = @amount_of_jobs.to_i/14
+  @page_stuff = []
+  @amount_of_pages.times do |i|
+    @page = Nokogiri::HTML(open("#{@link}&start=#{i*10}"))
+    @page_stuff.push(@page.css('.row'))
+  end
 
 
   #grab the first page and then change the link to have this at the end: &start=10
-  @page_stuff = @page.css('.row')
+
 
 
   erb(:home)
