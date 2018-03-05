@@ -1,0 +1,15 @@
+<% @stores.each() do |store| %>
+  <li>
+    <form action="/store/<%=store.id%>/view" method="post">
+      <button class="noborder" type="submit"><%= store.name %></button>
+    </form>
+  </li>
+<% end %>
+
+<!-- add store -->
+<div class="well">
+  <form action="/stores" method="post">
+      <input type="text" name="title" placeholder="ADD STORE">
+      <button type="submit" class="btn btn-success">ADD</button>
+  </form>
+</div>

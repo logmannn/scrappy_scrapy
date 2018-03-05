@@ -1,0 +1,18 @@
+amount of jobs: "<%=@amount_of_jobs %>"<br>
+amount of pages: "<%=@amount_of_pages %>"<br>
+<br>
+<% @page_stuff.each do |job| %>
+  <p>
+  https://www.indeed.com<%= job.css('a')[0]["href"]%>
+  <br><br>
+  <%= job.css('.jobtitle').text%>
+  <br>
+  <%= job.css('.company').text%>
+  <br>
+  <%= job.css('.summary').text%>
+  </p>
+
+  <br>
+  <hr>
+  <br>
+<% end %>

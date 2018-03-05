@@ -1,0 +1,15 @@
+<% @brands.each() do |brand| %>
+  <li><a href="/brand/<%= brand.id %>"><%= brand.name %></a></li>
+<% end %>
+
+<!-- add store -->
+<div class="well">
+  <form action="/brands" method="post">
+
+    <label for="">Brand Name</label>
+    <input type="text" name="title" placeholder="Brand Name">
+    <label for="">Price</label>
+    <input type="text" name="price" placeholder="Price">
+    <button type="submit" class="btn btn-success">ADD</button>
+  </form>
+</div>

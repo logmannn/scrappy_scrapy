@@ -1,0 +1,29 @@
+<h3>Store:</h3>
+<%=@store.name%>
+
+<h3>Add brands:</h3>
+
+<% if @brands.any?() %>
+  <form action="/store/<%= @store.id %>/view" method="post">
+    <input type="hidden" name="_method" value="patch">
+    <div class="row">
+      <div class="col-md-12">
+        <% @brands.each() do |brand| %>
+          <div class="checkbox">
+            <label>
+              <input type="checkbox" name="brand_ids[]" value="<%= brand.id() %>"><%= brand.name%>
+            </label>
+          </div>
+        <% end %>
+      </div>
+    </div>
+    <button type="submit">Add Brands</button>
+  </form>
+<% end %>
+
+<h2><%= @store.name %> Brand</h2>
+<% if @store.brands.any?() %>
+    <% @store_brands.each() do |brand| %>
+      <h3><%= brand.name%></h3>
+    <% end %>
+<% end %>
