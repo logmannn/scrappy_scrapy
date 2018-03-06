@@ -8,7 +8,10 @@ set(:root, Dir.pwd())
 require "shoulda/matchers"
 require "shoulda/matchers/integrations/rspec"
 require'sinatra'
+require 'nokogiri-styles'
 require 'sinatra/activerecord'
+require 'oga'
+
 # require File.dirname(__FILE__) + '/../lib/*.rb'
 Dir[File.dirname(__FILE__) + '/../lib/*.rb'].each { |file| require file }
 

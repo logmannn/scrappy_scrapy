@@ -1,17 +1,24 @@
 amount of jobs: "<%=@amount_of_jobs %>"<br>
 amount of pages: "<%=@amount_of_pages %>"<br>
+<hr><hr>
 <br>
+
 <% @page_stuff.each do |page| %>
   <% page.each do |job| %>
     <p>
-    https://www.indeed.com<%= job.css('a')[0]["href"]%>
-    <br><br>
-    <%= job.css('.jobtitle').text%>
-    <br>
-    <%= job.css('.company').text%>
-    <br>
-    <%= job.css('.summary').text%>
+      https://www.indeed.com<%= job.css('a')[0]["href"]%>
+      <br><br>
+      title: <%= job.css('.jobtitle').text%>
+      <br>
+      company: <%= job.css('.company').text%>
+      <br>
+      summary: <%= job.css('.summary').text%>
+      <br>
+      date: <%= job.css('.date').text %>
+      <br>
+      location: <%= job.css('.location').text %>
     </p>
+
 
     <br>
     <hr>

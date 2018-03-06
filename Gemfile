@@ -9,6 +9,8 @@ gem("sinatra")
 # gem("open-uri")
 # gem("rubygems")
 gem("nokogiri")
+gem("nokogiri-styles")
+gem("oga")
 
 group(:test) do
   gem("rspec")
