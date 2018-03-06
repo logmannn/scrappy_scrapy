@@ -5,22 +5,19 @@ Bundler.require(:default)
 Dir[File.dirname(__FILE__) + '/lib/*.rb'].each { |file| require file }
 
 get('/') do
-  @link = "https://www.indeed.com/jobs?q=jr+developer&l=Portland%2C+OR"
-  @page = Nokogiri::HTML(open("#{@link}"))
+  #craigslist
+  @query = "developer"
+  @clink = "https://portland.craigslist.org/search/jjj?query=#{@query}&s=0&sort=rel"
+  @cpage = Nokogiri::HTML(open("#{@clink}"))
+  @camount_of_jobs = ((@cpage.css('.totalcount').first).text).to_s
+  @camount_of_pages = (@camount_of_jobs.to_i)/120
 
-  #amount of jobs to get page amounts
-  @amount_of_jobs = @page.css('#searchCount').to_s
-  @amount_of_jobs =~ /Page 1 of (.*?) jobs/
-  @amount_of_jobs = $1.gsub(/\,/, '')
-  @amount_of_pages = @amount_of_jobs.to_i/14
-
-  @page_stuff = []
-  @amount_of_pages.times do |i|
-    @page = Nokogiri::HTML(open("#{@link}&start=#{i*10}"))
-    @page_stuff.push(@page.css('.row'))
-    puts i
+  @clinkmod = "https://portland.craigslist.org/search/jjj?query=#{@query}&s="
+  @cpage_stuff = []
+  @camount_of_pages.times do |i|
+    @cpage = Nokogiri::HTML(open("#{@clinkmod}#{i*120}&sort=rel"))
+    @cpage_stuff.push(@cpage.css('.result-info'))
   end
-
   erb(:home)
 end
 

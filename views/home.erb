@@ -1,24 +1,16 @@
-amount of jobs: "<%=@amount_of_jobs %>"<br>
-amount of pages: "<%=@amount_of_pages %>"<br>
+amount of jobs: "<%=@camount_of_jobs %>"<br>
+amount of pages: "<%=@camount_of_pages %>"<br>
 <hr><hr>
 <br>
 
-<% @page_stuff.each do |page| %>
+<% @cpage_stuff.each do |page| %>
   <% page.each do |job| %>
     <p>
-      https://www.indeed.com<%= job.css('a')[0]["href"]%>
-      <br><br>
-      title: <%= job.css('.jobtitle').text%>
-      <br>
-      company: <%= job.css('.company').text%>
-      <br>
-      summary: <%= job.css('.summary').text%>
-      <br>
-      date: <%= job.css('.date').text %>
-      <br>
-      location: <%= job.css('.location').text %>
+      link: <%= job.css('.result-title')[0]["href"]%><br>
+      title: <%= job.css('.result-title').text%><br>
+      location: <%= (job.css('.result-hood').text).gsub(/[\(\)]/, '')%><br>
+      date:  <%= (job.css('.result-date').text).gsub(/[\(\)]/, '')%><br>
     </p>
-
 
     <br>
     <hr>
